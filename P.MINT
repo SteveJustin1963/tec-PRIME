@@ -14,7 +14,7 @@
 
 : R                                    \\ R  ( n -- )
    1 c!                                 \\var c
-   2 . ." Prime number #" C@ . ." : " . cr
+   2 . ." Prime number #" c@ . ." : " . cr
    2 c!
    begin " P  if
       c@ 1+ c!
