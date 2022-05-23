@@ -1,4 +1,9 @@
+; This code is finding the prime numbers in a given range. The range is input by the user. 
+; The code starts at 3 and checks each number in the range to see if it is evenly divisible by any 
+; number between 2 and the square root of the number. If the number is not evenly divisible by any number, 
+; it is a prime number and is printed out.
 
+   
 #include <stdio.h>
 #include <stdlib.h>
 
