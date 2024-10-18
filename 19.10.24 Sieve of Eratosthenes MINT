@@ -1,24 +1,29 @@
 // Define the maximum number as a constant
-8190 m !
+100 m !  // Reduced to 100 for easier debugging
 
 // Allocate memory for the flags array
 :X
     m 1 + /A a !  // Allocate m+1 bytes and store the pointer in 'a'
+    `Memory allocated at address: ` a , /N  // Print allocated address
 ;
 
 // Initialize the flags array
 :I
+    `Initializing array...` /N
     m 1 + (  // Loop from 0 to m+1
         1 a /i + \!  // Set the value at flags[/i] to 1 (initialize as prime)
     )
+    `Array initialized.` /N
 ;
 
-// Sieve of Eratosthenes algorithm
+// Sieve of Eratosthenes algorithm with progress indicator
 :S
+    `Calculating primes up to ` m . `:` /N
     2 n !  // Start with n = 2 (smallest prime number)
     /U (
         n n * m <= /W  // Continue while n * n is less than or equal to m
         a n + \? (  // Check if the current number n is marked as prime
+            `.`  // Print a dot to indicate progress
             n n * p !  // Set p to n * n (starting point for marking multiples)
             /U (
                 p m <= /W  // Continue while p is less than or equal to m
@@ -28,11 +33,12 @@
         )
         n 1 + n !  // Increment n to check the next number
     )
+    /N `Sieve completed.` /N
 ;
 
 // Print the prime numbers from the flags array
 :P
-    `Primes: ` /N  // Print the label "Primes:" followed by a newline
+    `Prime numbers found:` /N
     2 n !  // Start with n = 2 (smallest prime number)
     /U (
         n m <= /W  // Continue while n is less than or equal to m
@@ -45,11 +51,23 @@
     /N  // Print a newline at the end
 ;
 
+// Debug function to print the entire flags array
+:D
+    `Flags array contents:` /N
+    m 1 + (  // Loop from 0 to m+1
+        a /i + \? .  // Print the value at flags[/i]
+        ` `  // Print a space
+    )
+    /N
+;
+
 // Main function to find and print prime numbers
 :M
     X  // Allocate memory for flags
     I  // Initialize the flags array
+    D  // Debug: Print initial flags array
     S  // Run the Sieve of Eratosthenes algorithm
+    D  // Debug: Print flags array after sieve
     P  // Print the prime numbers
 ;
 
