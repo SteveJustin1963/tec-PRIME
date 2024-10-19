@@ -1,1 +1,56 @@
-vv
+:P
+  30 n !
+  n /A f !
+  n (
+    1 f /i ?!
+  )
+  n 2 - (
+    /i 2 + p !
+    f p ? 1 = (
+      p p * k !
+      /U (
+        k n < /W
+        0 f k ?!
+        k p + k !
+      )
+    )
+  )
+  n 2 - (
+    /i 2 + p !
+    f p ? 1 = (
+      p .
+    )
+  )
+;
+
+P
+
+//////////////////
+
+  30 n !             // Set the limit N to 30
+  n /A f !           // Allocate an array of size N and store the pointer in 'f'
+  // Initialize the flags array to 1 (assume all numbers are prime initially)
+  n (
+    1 f /i ?!        // Set f[i] = 1
+  )
+  // Perform the Sieve of Eratosthenes
+  n 2 - (            // Loop from p = 2 to N - 1
+    /i 2 + p !       // Calculate p = /i + 2
+    f p ? 1 = (      // If f[p] == 1 (number is prime)
+      p p * k !      // k = p * p (starting point for marking multiples)
+      /U (           // Start an unlimited loop to mark multiples
+        k n < /W     // Continue while k < n
+        0 f k ?!     // Set f[k] = 0 (mark as non-prime)
+        k p + k !    // k = k + p (next multiple of p)
+      )
+    )
+  )
+  // Output the prime numbers
+  n 2 - (            // Loop from p = 2 to N - 1
+    /i 2 + p !       // Calculate p = /i + 2
+    f p ? 1 = (      // If f[p] == 1 (number is prime)
+      p .            // Print the prime number
+    )
+  )
+;
+///////////////////////////////////////
