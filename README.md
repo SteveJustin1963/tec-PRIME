@@ -1,5 +1,6 @@
 # tec-PRIME
-![image](https://github.com/user-attachments/assets/91203b4e-0041-40ed-9578-82cbb6a3e4f8)
+![image](https://github.com/user-attachments/assets/eaa363c8-2bb4-482f-86cd-ed312556867f)
+
 
 
 The **Sieve of Eratosthenes** is an ancient algorithm used to find all prime numbers up to a specified integer. It is efficient and simple, especially for smaller numbers. The algorithm works by iteratively marking the multiples of each prime number, starting with the smallest prime number (2). Here's a step-by-step explanation:
