@@ -1,65 +1,60 @@
-// MINT2
+// MINT2  
+// Input n on stack, outputs formatted primes
 
 :P
-  30 n !
-  n /A f !
-  n (
-    1 f /i ?!
-  )
-  n 2 - (
-    /i 2 + p !
-    f p ? 1 = (
-      p p * k !
-      /U (
-        k n < /W
-        0 f k ?!
-        k p + k !
-      )
+// --- Initialize ---
+n!               // Get limit from stack
+n /A f!          // Allocate array dynamically
+0 t!             // Prime counter
+0 c!             // Column counter
+
+// --- Print header ---
+`Prime numbers up to ` n . `:` /N
+
+// --- Mark all as potential primes ---
+n ( 
+    1 f /i ?!    // Set all flags to 1
+)
+
+// --- Sieve process ---
+n 2 - (          // Loop p = 2 to n-1
+    /i 2 + p!    // Current number p
+    f p ? 1 = (  // If p is marked prime
+        // Mark all multiples as non-prime
+        p p * k! // Start at p*p
+        /U (     // Unlimited loop
+            k n < /W     // While k < n
+            0 f k ?!     // Mark as non-prime
+            k p + k!     // Next multiple
+        )
     )
-  )
-  n 2 - (
-    /i 2 + p !
-    f p ? 1 = (
-      p .
+)
+
+// --- Print primes with formatting ---
+n 2 - (          // Loop through all numbers
+    /i 2 + p!    // Get current number
+    f p ? 1 = (  // If it's prime
+        p 10 < ( // Single digit
+            ` `  // Extra space
+        )
+        p .      // Print prime
+        ` `      // Space after number
+        
+        // Column handling
+        c 1+ c!  // Increment column
+        c 10 = ( // Every 10 numbers
+            /N   // New line
+            0 c! // Reset column
+        )
+        
+        // Count primes
+        t 1+ t!  // Increment total
     )
-  )
+)
+
+// --- Print summary ---
+/N /N
+`Found ` t . ` primes` /N
 ;
 
-P
-
-
-> P
-2 3 5 7 11 13 17 19 23 29
->
-
-
-
-//////////////////
-
-  30 n !             // Set the limit N to 30
-  n /A f !           // Allocate an array of size N and store the pointer in 'f'
-  // Initialize the flags array to 1 (assume all numbers are prime initially)
-  n (
-    1 f /i ?!        // Set f[i] = 1
-  )
-  // Perform the Sieve of Eratosthenes
-  n 2 - (            // Loop from p = 2 to N - 1
-    /i 2 + p !       // Calculate p = /i + 2
-    f p ? 1 = (      // If f[p] == 1 (number is prime)
-      p p * k !      // k = p * p (starting point for marking multiples)
-      /U (           // Start an unlimited loop to mark multiples
-        k n < /W     // Continue while k < n
-        0 f k ?!     // Set f[k] = 0 (mark as non-prime)
-        k p + k !    // k = k + p (next multiple of p)
-      )
-    )
-  )
-  // Output the prime numbers
-  n 2 - (            // Loop from p = 2 to N - 1
-    /i 2 + p !       // Calculate p = /i + 2
-    f p ? 1 = (      // If f[p] == 1 (number is prime)
-      p .            // Print the prime number
-    )
-  )
-;
-///////////////////////////////////////
+// Example usage: 100 P
