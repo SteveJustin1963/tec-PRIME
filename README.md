@@ -1,4 +1,9 @@
 # tec-PRIME
+
+- https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+- https://github.com/SteveJustin1963/tec-Shor
+- https://en.wikipedia.org/wiki/Shor%27s_algorithm
+
 ![image](https://github.com/user-attachments/assets/eaa363c8-2bb4-482f-86cd-ed312556867f)
 
 
